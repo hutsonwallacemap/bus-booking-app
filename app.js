@@ -104,8 +104,11 @@ function initApp() {
     const savedBuses = localStorage.getItem('islander-buses');
     if (savedBuses) {
         const parsed = JSON.parse(savedBuses);
-        // If the cache exists but doesn't have ferries, regenerate to load ferries.
-        if (parsed.length > 0 && parsed.some(b => b.category === 'ferry')) {
+        const tom = new Date(); tom.setDate(tom.getDate() + 1);
+        const tomStr = tom.toISOString().split('T')[0];
+        
+        // If the cache exists but doesn't have ferries, or doesn't have fresh dates, regenerate
+        if (parsed.length > 0 && parsed.some(b => b.category === 'ferry') && parsed.some(b => b.date === tomStr)) {
             AppState.buses = parsed;
         } else {
             generateMockBuses();
