@@ -107,8 +107,9 @@ function initApp() {
         const tom = new Date(); tom.setDate(tom.getDate() + 1);
         const tomStr = tom.toISOString().split('T')[0];
         
-        // If the cache exists but doesn't have ferries, or doesn't have fresh dates, regenerate
-        if (parsed.length > 0 && parsed.some(b => b.category === 'ferry') && parsed.some(b => b.date === tomStr)) {
+        const hasReturnBus = parsed.some(b => b.category === 'bus' && b.id.includes('RET'));
+        // If the cache exists but doesn't have ferries, or doesn't have fresh dates, or missing return routes, regenerate
+        if (parsed.length > 0 && parsed.some(b => b.category === 'ferry') && parsed.some(b => b.date === tomStr) && hasReturnBus) {
             AppState.buses = parsed;
         } else {
             generateMockBuses();
@@ -162,6 +163,17 @@ function generateMockBuses() {
                     operator: op.name, busName: bt.name, busType: bt.type,
                     rating: op.rating, fare, totalSeats: bt.seats,
                     bookedSeats, travelTime: route.travelTime, distance: route.distance
+                });
+                
+                // Add RETURN trip
+                AppState.buses.push({
+                    id: `BUS-RET-${route.id.toUpperCase()}-${dateStr}-${i}`,
+                    category: 'bus',
+                    routeId: route.id + '-ret', from: route.to, to: route.from,
+                    date: dateStr, departureTime: time,
+                    operator: op.name, busName: bt.name, busType: bt.type,
+                    rating: op.rating, fare: fare, totalSeats: bt.seats,
+                    bookedSeats: [], travelTime: route.travelTime, distance: route.distance
                 });
             });
         });
