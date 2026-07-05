@@ -658,8 +658,8 @@ function renderSearchScreen(root) {
         });
     }
 
-    rebuildSearchContent();
     root.appendChild(section);
+    rebuildSearchContent();
 }
 
 function isATRRoute(f, t) {
