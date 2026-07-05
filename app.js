@@ -636,10 +636,14 @@ function renderSearchScreen(root) {
         });
     }
 
-    function isATRRoute(f, t) {
-        return (f==='Port Blair' && ['Baratang','Rangat','Mayabunder','Diglipur'].includes(t)) ||
-               (['Baratang','Rangat','Mayabunder','Diglipur'].includes(f) && t==='Port Blair');
-    }
+    rebuildSearchContent();
+    root.appendChild(section);
+}
+
+function isATRRoute(f, t) {
+    return (f==='Port Blair' && ['Baratang','Rangat','Mayabunder','Diglipur'].includes(t)) ||
+           (['Baratang','Rangat','Mayabunder','Diglipur'].includes(f) && t==='Port Blair');
+}
 
 // ── Screen: Bus List ───────────────────────────────────────────────────────
 
@@ -1043,7 +1047,6 @@ function renderSeatSelectionScreen(root) {
 
     root.appendChild(section);
     rebuildCabinUI();
-}
 }
 
 // ── Screen: Passenger Details ──────────────────────────────────────────────
