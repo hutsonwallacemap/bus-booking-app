@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islander Transit - Andaman Bus Booking App</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header">
+            <div class="header-content container">
+                <div class="logo-group" id="btn-home-logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="10" width="20" height="8" rx="2" ry="2"></rect>
+                            <path d="M6 6h12a2 2 0 0 1 2 2v2H4V8a2 2 0 0 1 2-2z"></path>
+                            <path d="M6 18H4v2h2v-2zm14 0h-2v2h2v-2z"></path>
+                            <circle cx="7" cy="14" r="1.5"></circle>
+                            <circle cx="17" cy="14" r="1.5"></circle>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Islander<span>Transit</span></span>
+                </div>
+                
+                <!-- Desktop Navigation Links -->
+                <nav class="main-nav">
+                    <button class="nav-link active" id="nav-search">Book Ticket</button>
+                    <button class="nav-link" id="nav-history">My Bookings</button>
+                    <button class="nav-link" id="nav-convoy">ATR Convoy</button>
+                    <button class="nav-link" id="nav-admin">Admin Dashboard</button>
+                </nav>
+
+                <!-- Action Button / Profile Toggle -->
+                <div class="header-actions">
+                    <button class="btn-theme-toggle" id="theme-toggle" title="Toggle Dark/Light Mode">
+                        <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar" id="user-avatar-btn">A</div>
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <p class="dropdown-header">Welcome, Traveler</p>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" id="btn-profile-bookings">My Tickets</button>
+                            <button class="dropdown-item" id="btn-profile-admin">Admin mode</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Navigation Toggle -->
+                <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav" id="mobile-nav-menu">
+                <button class="mobile-nav-link active" id="m-nav-search">Book Ticket</button>
+                <button class="mobile-nav-link" id="m-nav-history">My Bookings</button>
+                <button class="mobile-nav-link" id="m-nav-convoy">ATR Convoy</button>
+                <button class="mobile-nav-link" id="m-nav-admin">Admin Dashboard</button>
+            </div>
+        </header>
+
+        <!-- Main Dynamic App Area -->
+        <main class="app-main">
+            <div id="app-root">
+                <!-- Javascript will inject screens here -->
+                <div class="loader-container">
+                    <div class="spinner"></div>
+                    <p>Loading Andaman's Transit System...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Global Modals -->
+        
+        <!-- Payment Modal -->
+        <div class="modal-backdrop" id="payment-modal">
+            <!-- Content will be rendered dynamically by JavaScript -->
+        </div>
+
+        <!-- ATR Convoy & Security Guidelines Modal -->
+        <div class="modal-backdrop" id="guidelines-modal">
+            <div class="modal-card guidelines-modal-card">
+                <div class="modal-header">
+                    <h3>ATR Tribal Reserve Guidelines</h3>
+                    <button class="btn-close-modal" id="btn-close-guidelines">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <strong>⚠️ MANDATORY COMPLIANCE:</strong> The Andaman Trunk Road (ATR) passes through the protected Jarawa Tribal Reserve. Strict laws apply.
+                    </div>
+                    
+                    <div class="guidelines-section">
+                        <h4>1. Security Convoy Rules</h4>
+                        <ul>
+                            <li>Buses travel in coordinated convoys escorted by Police vehicles.</li>
+                            <li>You must arrive at least 45 minutes before the scheduled convoy departure time at the checkpost.</li>
+                            <li>Convoys depart from Jirkatang (South Andaman) and Middle Strait (Baratang).</li>
+                        </ul>
+                    </div>
+
+                    <div class="guidelines-section">
+                        <h4>2. Tribal reserve regulations (Very Important)</h4>
+                        <ul>
+                            <li><strong>NO PHOTOGRAPHY OR VIDEOGRAPHY:</strong> Taking pictures or recording videos of tribal community members is a strict, non-bailable offense under the PAT regulation. Penalties include imprisonment and confiscation of equipment.</li>
+                            <li><strong>NO CONTACT:</strong> Do not attempt to interact, talk to, offer food, or throw objects/clothing at tribals.</li>
+                            <li><strong>WINDOWS CLOSED:</strong> Keep bus windows shut or pull up shutters when passing through the reserve forests.</li>
+                            <li><strong>NO OVERTAKING:</strong> Vehicles must remain in line and not halt or overtake inside the forest limit.</li>
+                        </ul>
+                    </div>
+
+                    <div class="guidelines-section">
+                        <h4>3. Jirkatang Convoy Timings</h4>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Convoy Slot</th>
+                                        <th>Jirkatang gate open</th>
+                                        <th>Destination reach</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Convoy 1</td>
+                                        <td>06:00 AM</td>
+                                        <td>~08:00 AM (Baratang)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Convoy 2</td>
+                                        <td>09:00 AM</td>
+                                        <td>~11:00 AM (Baratang)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Convoy 3</td>
+                                        <td>12:30 PM</td>
+                                        <td>~02:30 PM (Baratang)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Convoy 4</td>
+                                        <td>02:30 PM</td>
+                                        <td>~04:30 PM (Baratang)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-primary" id="btn-guidelines-accept">I Understand & Agree</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Toast Notification -->
+        <div class="toast-container" id="toast-container"></div>
+
+        <!-- App Footer -->
+        <footer class="app-footer">
+            <div class="footer-content container">
+                <div class="footer-info">
+                    <div class="logo-group">
+                        <div class="logo-icon-small">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="10" width="20" height="8" rx="2" ry="2"></rect>
+                                <circle cx="7" cy="14" r="1.5"></circle>
+                                <circle cx="17" cy="14" r="1.5"></circle>
+                            </svg>
+                        </div>
+                        <span class="logo-text-small">Islander<span>Transit</span></span>
+                    </div>
+                    <p class="footer-desc">The official transit gateway of Andaman & Nicobar Islands. Reliable, booking services connecting Port Blair, Baratang, Rangat, Mayabunder, and Diglipur.</p>
+                </div>
+                <div class="footer-links">
+                    <h5>Useful Links</h5>
+                    <ul>
+                        <li><a href="#" id="link-f-convoy">Convoy Regulations</a></li>
+                        <li><a href="#" id="link-f-history">Manage Bookings</a></li>
+                        <li><a href="#" id="link-f-admin">Agent Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h5>Emergency Helplines</h5>
+                    <p>📞 Jirkatang Checkpost: +91 3192 224214</p>
+                    <p>📞 Middle Strait Checkpost: +91 3192 274201</p>
+                    <p>📞 STS Transport Head Office: +91 3192 232261</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Islander Transit. Developed for Andaman Bus Operations. All Passenger rules apply.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
