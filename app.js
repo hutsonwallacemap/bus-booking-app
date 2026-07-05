@@ -641,24 +641,6 @@ function renderSearchScreen(root) {
                (['Baratang','Rangat','Mayabunder','Diglipur'].includes(f) && t==='Port Blair');
     }
 
-        e.preventDefault();
-        if (fromSel.value === toSel.value) { showToast('Origin and destination cannot be the same', 'error'); return; }
-        AppState.search.from       = fromSel.value;
-        AppState.search.to         = toSel.value;
-        AppState.search.date       = document.getElementById('search-date').value;
-        AppState.search.passengers = parseInt(document.getElementById('search-passengers').value);
-        navigateTo('bus-list');
-    });
-
-    // Guidelines popup from index.html (convoy link)
-    document.getElementById('btn-close-guidelines')?.addEventListener('click', () =>
-        document.getElementById('guidelines-modal').classList.remove('show'));
-    document.getElementById('btn-guidelines-accept')?.addEventListener('click', () => {
-        document.getElementById('guidelines-modal').classList.remove('show');
-        showToast('Guidelines accepted', 'success');
-    });
-}
-
 // ── Screen: Bus List ───────────────────────────────────────────────────────
 
 function renderBusListScreen(root) {
@@ -1736,7 +1718,6 @@ function renderAdminScreen(root) {
         showToast(`✅ New ${cat === 'bus' ? 'bus' : 'ferry'} registered successfully!`, 'success');
         navigateTo('admin');
     });
-}
 }
 
 // ── Utilities ──────────────────────────────────────────────────────────────
