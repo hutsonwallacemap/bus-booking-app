@@ -9,6 +9,12 @@ const MOCK_ROUTES = [
     { id: 'pb-rt', from: 'Port Blair', to: 'Rangat',      distance: 170, travelTime: '6 hrs',   baseFare: 320 },
     { id: 'pb-mb', from: 'Port Blair', to: 'Mayabunder',  distance: 230, travelTime: '8.5 hrs', baseFare: 480 },
     { id: 'pb-dp', from: 'Port Blair', to: 'Diglipur',    distance: 300, travelTime: '11 hrs',  baseFare: 650 },
+    { id: 'bt-rt', from: 'Baratang',   to: 'Rangat',      distance: 70,  travelTime: '2.5 hrs', baseFare: 170 },
+    { id: 'bt-mb', from: 'Baratang',   to: 'Mayabunder',  distance: 130, travelTime: '5 hrs',   baseFare: 330 },
+    { id: 'bt-dp', from: 'Baratang',   to: 'Diglipur',    distance: 200, travelTime: '7.5 hrs', baseFare: 500 },
+    { id: 'rt-mb', from: 'Rangat',     to: 'Mayabunder',  distance: 60,  travelTime: '2.5 hrs', baseFare: 160 },
+    { id: 'rt-dp', from: 'Rangat',     to: 'Diglipur',    distance: 130, travelTime: '5 hrs',   baseFare: 330 },
+    { id: 'mb-dp', from: 'Mayabunder', to: 'Diglipur',    distance: 70,  travelTime: '2.5 hrs', baseFare: 170 },
     { id: 'pb-wd', from: 'Port Blair', to: 'Wandoor',     distance: 25,  travelTime: '1 hr',    baseFare: 50  },
     { id: 'pb-ct', from: 'Port Blair', to: 'Chidiyatapu', distance: 30,  travelTime: '1 hr',    baseFare: 50  }
 ];
@@ -108,8 +114,9 @@ function initApp() {
         const tomStr = tom.toISOString().split('T')[0];
         
         const hasReturnBus = parsed.some(b => b.category === 'bus' && b.id.includes('RET'));
-        // If the cache exists but doesn't have ferries, or doesn't have fresh dates, or missing return routes, regenerate
-        if (parsed.length > 0 && parsed.some(b => b.category === 'ferry') && parsed.some(b => b.date === tomStr) && hasReturnBus) {
+        const hasIntermediateBus = parsed.some(b => b.routeId === 'bt-rt');
+        // If the cache exists but doesn't have ferries, or doesn't have fresh dates, or missing return/intermediate routes, regenerate
+        if (parsed.length > 0 && parsed.some(b => b.category === 'ferry') && parsed.some(b => b.date === tomStr) && hasReturnBus && hasIntermediateBus) {
             AppState.buses = parsed;
         } else {
             generateMockBuses();
